@@ -1,8 +1,10 @@
 package towa.task_app;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -58,5 +60,26 @@ public class MainActivity extends AppCompatActivity
         Log.d(tag, "The onDestroy() event");
     }
     //------------------------------------------------------------------------------------------------------------------
+    public void ShowNewTaskForm(View view)
+    //                                                      //onClick-ButtonNewTask (New button)
+    {
+        //                                                  //To verify the click get the method.
+        Log.d(tag, "click ButtonNewTask");
+
+        //                                                  //Explicit Intent to start NewTaskFormActivity.
+        Intent intent = new Intent(getApplicationContext(), NewTaskFormActivity.class);
+        startActivity(intent);
+    }
+    //------------------------------------------------------------------------------------------------------------------
+    public void ShowAllTasks(View view)
+    //                                                      //onClick-ButtonShowAll (Show All button)
+    {
+        //                                                  //To verify the click get the method.
+        Log.d(tag, "click ButtonShowAll");
+
+        //                                                  //Explicit Intent to start TaskListActivity.
+    }
+    //------------------------------------------------------------------------------------------------------------------
+
 }
 /*END-ACTIVITY*/

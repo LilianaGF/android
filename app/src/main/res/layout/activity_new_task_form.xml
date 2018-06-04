@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewTaskFormActivity">
+
+    <Button
+        android:id="@+id/ButtonCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="24dp"
+        android:onClick="CancelNewTask"
+        android:text="@string/Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ButtonSave"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/ButtonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="24dp"
+        android:onClick="SaveNewTask"
+        android:text="@string/Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ButtonCancel" />
+
+    <Switch
+        android:id="@+id/SwitchDone"
+        android:layout_width="250dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/Done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditTextLongDescription" />
+
+    <SeekBar
+        android:id="@+id/SeekBarPercentage"
+        android:layout_width="130dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="48dp"
+        android:max="100"
+        app:layout_constraintEnd_toEndOf="@+id/SwitchDone"
+        app:layout_constraintTop_toBottomOf="@+id/SwitchDone" />
+
+    <EditText
+        android:id="@+id/EditTextShortDesccription"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="@string/ShortDescription"
+        android:inputType="text|textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/EditTextLongDescription"
+        android:layout_width="250dp"
+        android:layout_height="148dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/LongDescription"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditTextShortDesccription" />
+
+    <TextView
+        android:id="@+id/TextViewLabelPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/Percentage"
+        app:layout_constraintStart_toStartOf="@+id/SwitchDone"
+        app:layout_constraintTop_toBottomOf="@+id/SwitchDone" />
+
+    <TextView
+        android:id="@+id/TextViewPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/intPercentage"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/SeekBarPercentage"
+        app:layout_constraintTop_toBottomOf="@+id/SeekBarPercentage" />
+
+</android.support.constraint.ConstraintLayout>
