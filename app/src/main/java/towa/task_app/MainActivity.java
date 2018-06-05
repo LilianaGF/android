@@ -1,15 +1,21 @@
 package towa.task_app;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
 {
     //                                                      //tag for Log.d() method.
     final static String tag = "LGF";
+    BroadcastReceiver showTaskReceiver = new ShowTaskReceiver();
     //------------------------------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -18,7 +24,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(tag, "The onCreate() event");
+        //                                                  //To register a receiver of the broadcast
+        Log.d(tag, "Registrando....");
+
+        IntentFilter intentFilter = new IntentFilter("com.LGF.CUSTOM_INTENT.TasksReady");
+        this.registerReceiver(this.showTaskReceiver, intentFilter);
     }
+
     //------------------------------------------------------------------------------------------------------------------
     @Override
     protected void onStart()
@@ -34,6 +46,9 @@ public class MainActivity extends AppCompatActivity
     {
         super.onResume();
         Log.d(tag, "The onResume() event");
+        //                                                  //Asking to the DB for data.
+        TaskDB taskDBInstance = TaskDB.getTaskDB(getApplicationContext());
+        DBUtil.DBGetAllTask(taskDBInstance, getApplicationContext());
     }
     //------------------------------------------------------------------------------------------------------------------
     @Override
@@ -42,6 +57,10 @@ public class MainActivity extends AppCompatActivity
     {
         super.onPause();
         Log.d(tag, "The onPause() event");
+
+        //                                                  //To unregister a receiver of the broadcast
+        Log.d(tag, "Unregistrando....");
+        this.unregisterReceiver(this.showTaskReceiver);
     }
     //------------------------------------------------------------------------------------------------------------------
     @Override
@@ -58,8 +77,12 @@ public class MainActivity extends AppCompatActivity
     {
         super.onDestroy();
         Log.d(tag, "The onDestroy() event");
+        //                                                  //Destroy de DB INSTANCE.
+        TaskDB.destroyInstance();
     }
+
     //------------------------------------------------------------------------------------------------------------------
+
     public void ShowNewTaskForm(View view)
     //                                                      //onClick-ButtonNewTask (New button)
     {
@@ -79,7 +102,20 @@ public class MainActivity extends AppCompatActivity
 
         //                                                  //Explicit Intent to start TaskListActivity.
     }
-    //------------------------------------------------------------------------------------------------------------------
 
+    //------------------------------------------------------------------------------------------------------------------
+    private class ShowTaskReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //                                              //When com.LGF.CUSTOM_INTENT.TasksReady occurs
+
+            List<Task> listOfTask = DBUtil.getTasks();
+            for (Task task: listOfTask){
+                Log.d("LGF - Tasks ", task.getShortDescription() + ", " +
+                        String.valueOf(task.getPercentage()));
+            }
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------------
 }
 /*END-ACTIVITY*/

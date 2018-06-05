@@ -133,6 +133,10 @@ public class NewTaskFormActivity extends AppCompatActivity {
             task.setPercentage(seekbarPercentage.getProgress());
         }
 
+        //                                                  //Asking to the DB to save.
+        TaskDB taskDBInstance = TaskDB.getTaskDB(getApplicationContext());
+        DBUtil.DBSaveNewTask(taskDBInstance, task);
+
         //                                                  //Back to main activity.
         android.content.Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
