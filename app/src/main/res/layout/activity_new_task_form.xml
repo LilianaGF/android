@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/EditTextLongDescription" />
 
     <SeekBar
-        android:id="@+id/SeekBarPercentage"
+        android:id="@+id/SeekbarPercentage"
         android:layout_width="130dp"
         android:layout_height="16dp"
         android:layout_marginTop="48dp"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/SwitchDone" />
 
     <EditText
-        android:id="@+id/EditTextShortDesccription"
+        android:id="@+id/EditTextShortDescription"
         android:layout_width="250dp"
         android:layout_height="48dp"
         android:layout_marginTop="32dp"
@@ -76,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextShortDesccription" />
+        app:layout_constraintTop_toBottomOf="@+id/EditTextShortDescription" />
 
     <TextView
         android:id="@+id/TextViewLabelPercentage"
@@ -95,7 +95,7 @@
         android:text="@string/intPercentage"
         android:textSize="24sp"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/SeekBarPercentage"
-        app:layout_constraintTop_toBottomOf="@+id/SeekBarPercentage" />
+        app:layout_constraintEnd_toEndOf="@+id/SeekbarPercentage"
+        app:layout_constraintTop_toBottomOf="@+id/SeekbarPercentage" />
 
 </android.support.constraint.ConstraintLayout>

@@ -28,7 +28,7 @@ public class NewTaskFormActivity extends AppCompatActivity {
 
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     public void initiateTheSeekbarPercentage(){
-        SeekBar seekbarPercentage = findViewById(R.id.SeekBarPercentage);
+        SeekBar seekbarPercentage = findViewById(R.id.SeekbarPercentage);
 
         seekbarPercentage.setMax(100);
 
@@ -44,7 +44,7 @@ public class NewTaskFormActivity extends AppCompatActivity {
 
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     public void addListenerToTheSeekbarPercentage(){
-        SeekBar seekbarPercentage = findViewById(R.id.SeekBarPercentage);
+        SeekBar seekbarPercentage = findViewById(R.id.SeekbarPercentage);
 
         seekbarPercentage.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progressChangedValue = 0;
@@ -88,7 +88,7 @@ public class NewTaskFormActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 TextView textViewPercentage = findViewById(R.id.TextViewPercentage);
-                SeekBar seekbarPercentage = findViewById(R.id.SeekBarPercentage);
+                SeekBar seekbarPercentage = findViewById(R.id.SeekbarPercentage);
                 if(isChecked){
 
                     textViewPercentage.setText("100%");
@@ -110,6 +110,29 @@ public class NewTaskFormActivity extends AppCompatActivity {
     }
     //------------------------------------------------------------------------------------------------------------------
     public void SaveNewTask(View view) {
+        Log.d(tag, "click ButtonSave");
+
+        Task task = new Task();
+
+        //                                                  //Reading the short description.
+        TextView editTextShortDescription = findViewById(R.id.EditTextShortDescription);
+        String strShortDescription = editTextShortDescription.getText().toString();
+        task.setShortDescription(strShortDescription);
+
+        //                                                  //Reading the long description.
+        TextView editTextLongDescription = findViewById(R.id.EditTextLongDescription);
+        String strLongDescription = editTextLongDescription.getText().toString();
+        task.setLongDescription(strLongDescription);
+
+        //                                                  //Reading the percentage.
+        Switch switchDone = findViewById(R.id.SwitchDone);
+        if (switchDone.isChecked())
+            task.setPercentage(100);
+        else{
+            SeekBar seekbarPercentage = findViewById(R.id.SeekbarPercentage);
+            task.setPercentage(seekbarPercentage.getProgress());
+        }
+
         //                                                  //Back to main activity.
         android.content.Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
