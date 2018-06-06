@@ -41,6 +41,22 @@ public class DBUtil {
         TaskCount TaskCount = new TaskCount(taskDBInstance, context);
         TaskCount.execute();
     }
+
+    public static void DBGetToDoTask(TaskDB taskDBInstance, Context context){
+        GetToDoTask getToDoTask = new GetToDoTask(taskDBInstance, context);
+        getToDoTask.execute();
+    }
+
+    public static void DBGetDoingTask(TaskDB taskDBInstance, Context context){
+        GetDoingTask getDoingTask = new GetDoingTask(taskDBInstance, context);
+        getDoingTask.execute();
+    }
+
+    public static void DBGetDoneTask(TaskDB taskDBInstance, Context context){
+        GetDoneTask getDoneTask = new GetDoneTask(taskDBInstance, context);
+        getDoneTask.execute();
+    }
+
     //-----------------------------------------------------------------------------------------------------------------
     private static class GetAllTask extends AsyncTask<Void, Void, Void> {
         TaskDB taskDBInstance;
@@ -115,4 +131,89 @@ public class DBUtil {
     }
 
     //-----------------------------------------------------------------------------------------------------------------
+
+    private static class GetToDoTask extends AsyncTask<Void, Void, Void> {
+        TaskDB taskDBInstance;
+        Context context;
+
+        public GetToDoTask(TaskDB taskDBInstance, Context context) {
+            this.taskDBInstance = taskDBInstance;
+            this.context = context;
+        }
+
+        @Override
+        protected Void doInBackground(final Void... params) {
+            tasks = taskDBInstance.taskDAO().getToDo();
+            ToDoTaskCount = tasks.size();
+            Log.d("ToDoTaskCount", "" + ToDoTaskCount);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void v)
+        {
+            Log.d("LGF Broadcast ", "TasksReady");
+            Intent intent = new Intent();
+            intent.setAction("com.LGF.CUSTOM_INTENT.TasksReady");
+            context.sendBroadcast(intent);
+        }
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------
+    private static class GetDoingTask extends AsyncTask<Void, Void, Void> {
+        TaskDB taskDBInstance;
+        Context context;
+
+        public GetDoingTask(TaskDB taskDBInstance, Context context) {
+            this.taskDBInstance = taskDBInstance;
+            this.context = context;
+        }
+
+        @Override
+        protected Void doInBackground(final Void... params) {
+            tasks = taskDBInstance.taskDAO().getDoing();
+            DoingTaskCount = tasks.size();
+            Log.d("DoingTaskCount", "" + DoingTaskCount);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void v)
+        {
+            Log.d("LGF Broadcast ", "TasksReady");
+            Intent intent = new Intent();
+            intent.setAction("com.LGF.CUSTOM_INTENT.TasksReady");
+            context.sendBroadcast(intent);
+        }
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------
+    private static class GetDoneTask extends AsyncTask<Void, Void, Void> {
+        TaskDB taskDBInstance;
+        Context context;
+
+        public GetDoneTask(TaskDB taskDBInstance, Context context) {
+            this.taskDBInstance = taskDBInstance;
+            this.context = context;
+        }
+
+        @Override
+        protected Void doInBackground(final Void... params) {
+            tasks = taskDBInstance.taskDAO().getDone();
+            DoneTaskCount = tasks.size();
+            Log.d("DoneTaskCount", "" + DoneTaskCount);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void v)
+        {
+            Log.d("LGF Broadcast ", "TasksReady");
+            Intent intent = new Intent();
+            intent.setAction("com.LGF.CUSTOM_INTENT.TasksReady");
+            context.sendBroadcast(intent);
+        }
+    }
+    //-----------------------------------------------------------------------------------------------------------------
+
 }

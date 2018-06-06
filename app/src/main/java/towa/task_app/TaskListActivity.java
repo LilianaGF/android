@@ -63,6 +63,39 @@ public class TaskListActivity extends AppCompatActivity
         //                                                  //Destroy de DB INSTANCE.
         TaskDB.destroyInstance();
     }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public void ShowAllTask(View view)
+    //                                                  //onClick-btnShowAll (Show All button)
+    {
+        TaskDB taskDBInstance = TaskDB.getTaskDB(getApplicationContext());
+        DBUtil.DBGetAllTask(taskDBInstance, getApplicationContext());
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public void ShowToDoTask(View view)
+    //                                                  //onClick-btnToDo (To Do button)
+    {
+        TaskDB taskDBInstance = TaskDB.getTaskDB(getApplicationContext());
+        DBUtil.DBGetToDoTask(taskDBInstance, getApplicationContext());
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public void ShowDoingTaskForm(View view)
+    //                                                  //onClick-btnDoing (Doing button)
+    {
+        TaskDB taskDBInstance = TaskDB.getTaskDB(getApplicationContext());
+        DBUtil.DBGetDoingTask(taskDBInstance, getApplicationContext());
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public void ShowDoneTaskForm(View view)
+    //                                                  //onClick-btnDone (Done button)
+    {
+        TaskDB taskDBInstance = TaskDB.getTaskDB(getApplicationContext());
+        DBUtil.DBGetDoneTask(taskDBInstance, getApplicationContext());
+    }
+
     //------------------------------------------------------------------------------------------------------------------
     private class ShowTaskReceiver extends BroadcastReceiver {
         @Override
