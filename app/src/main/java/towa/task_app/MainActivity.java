@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity
     //                                                      //tag for Log.d() method.
     final static String tag = "LGF";
     BroadcastReceiver showTaskReceiver = new ShowTaskReceiver();
+    BroadcastReceiver updateTaskCountReceiver = new UpdateTaskCountReceiver();
     //------------------------------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -24,11 +26,15 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(tag, "The onCreate() event");
-        //                                                  //To register a receiver of the broadcast
+
+        //                                                  //To register receivers of the broadcast
         Log.d(tag, "Registrando....");
 
-        IntentFilter intentFilter = new IntentFilter("com.LGF.CUSTOM_INTENT.TasksReady");
-        this.registerReceiver(this.showTaskReceiver, intentFilter);
+        IntentFilter intentTaskReady = new IntentFilter("com.LGF.CUSTOM_INTENT.TasksReady");
+        this.registerReceiver(this.showTaskReceiver, intentTaskReady);
+
+        IntentFilter intentTaskCountReady = new IntentFilter("com.LGF.CUSTOM_INTENT.TasksCountReady");
+        this.registerReceiver(updateTaskCountReceiver, intentTaskCountReady);
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -46,9 +52,12 @@ public class MainActivity extends AppCompatActivity
     {
         super.onResume();
         Log.d(tag, "The onResume() event");
-        //                                                  //Asking to the DB for data.
+
         TaskDB taskDBInstance = TaskDB.getTaskDB(getApplicationContext());
+        //                                                  //Asking to the DB for data.
         DBUtil.DBGetAllTask(taskDBInstance, getApplicationContext());
+        //                                                  //Asking to the DB to count.
+        DBUtil.DBTaskCount(taskDBInstance, getApplicationContext());
     }
     //------------------------------------------------------------------------------------------------------------------
     @Override
@@ -61,6 +70,7 @@ public class MainActivity extends AppCompatActivity
         //                                                  //To unregister a receiver of the broadcast
         Log.d(tag, "Unregistrando....");
         this.unregisterReceiver(this.showTaskReceiver);
+        this.unregisterReceiver(this.updateTaskCountReceiver);
     }
     //------------------------------------------------------------------------------------------------------------------
     @Override
@@ -119,5 +129,26 @@ public class MainActivity extends AppCompatActivity
         }
     }
     //------------------------------------------------------------------------------------------------------------------
+
+    private class UpdateTaskCountReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //                                              //When com.LGF.CUSTOM_INTENT.ToDoTaskCountReady occurs
+
+            int intToDoTask = DBUtil.getToDoTaskCount();
+            TextView textViewTaskToDo = findViewById(R.id.TextViewTaskToDoCount);
+            textViewTaskToDo.setText(String.valueOf(intToDoTask) + " Task To Do");
+
+            int intDoingTask = DBUtil.getDoingTaskCount();
+            TextView textViewTaskDoing = findViewById(R.id.TextViewTaskDoingCount);
+            textViewTaskDoing.setText(String.valueOf(intDoingTask) + " Task Doing");
+
+            int intDoneTask = DBUtil.getDoneTaskCount();
+            TextView textViewTaskDone = findViewById(R.id.TextViewTaskDoneCount);
+            textViewTaskDone.setText(String.valueOf(intDoneTask) + " Task Done");
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------------
+
 }
 /*END-ACTIVITY*/
