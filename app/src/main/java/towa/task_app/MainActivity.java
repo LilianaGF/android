@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import java.util.List;
 
@@ -18,6 +19,10 @@ public class MainActivity extends AppCompatActivity
     final static String tag = "LGF";
     BroadcastReceiver showTaskReceiver = new ShowTaskReceiver();
     BroadcastReceiver updateTaskCountReceiver = new UpdateTaskCountReceiver();
+
+
+
+
     //------------------------------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,6 +42,7 @@ public class MainActivity extends AppCompatActivity
         IntentFilter intentTaskCountReady = new IntentFilter("com.LGF.CUSTOM_INTENT.TasksCountReady");
         this.registerReceiver(updateTaskCountReceiver, intentTaskCountReady);
         */
+
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -54,6 +60,11 @@ public class MainActivity extends AppCompatActivity
 
         IntentFilter intentTaskCountReady = new IntentFilter("com.LGF.CUSTOM_INTENT.TasksCountReady");
         this.registerReceiver(updateTaskCountReceiver, intentTaskCountReady);
+
+
+
+
+
     }
     //------------------------------------------------------------------------------------------------------------------
     @Override
@@ -126,6 +137,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    public void FinishApp(View view)
+    //                                                      //onClick-toolbar (Toolbar back button)
+    {
+        Log.d(tag, "Bye Li...");
+        finish();
+    }
+    //------------------------------------------------------------------------------------------------------------------
     private class ShowTaskReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -138,8 +156,8 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
-    //------------------------------------------------------------------------------------------------------------------
 
+    //------------------------------------------------------------------------------------------------------------------
     private class UpdateTaskCountReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {

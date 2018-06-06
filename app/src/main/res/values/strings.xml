@@ -16,4 +16,7 @@
     <string name="ToDo">To Do</string>
     <string name="Doing">Doing</string>
     <string name="All">All</string>
+    <string name="appName">Task app</string>
+    <string name="TaskList">Task List</string>
+    <string name="TaskDetail">Task Detail</string>
 </resources>

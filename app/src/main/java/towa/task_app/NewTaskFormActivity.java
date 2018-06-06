@@ -108,6 +108,16 @@ public class NewTaskFormActivity extends AppCompatActivity {
         android.content.Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public void BackToMainActivity(View view) {
+
+        //                                                  //Back to main activity.
+        finish();
+        /*
+        android.content.Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);*/
+    }
     //------------------------------------------------------------------------------------------------------------------
     public void SaveNewTask(View view) {
         Log.d(tag, "click ButtonSave");

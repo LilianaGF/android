@@ -97,6 +97,15 @@ public class TaskListActivity extends AppCompatActivity
     }
 
     //------------------------------------------------------------------------------------------------------------------
+    public void BackToMainActivity(View view) {
+
+        //                                                  //Back to main activity.
+        finish();
+        /*
+        android.content.Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);*/
+    }
+    //------------------------------------------------------------------------------------------------------------------
     private class ShowTaskReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
