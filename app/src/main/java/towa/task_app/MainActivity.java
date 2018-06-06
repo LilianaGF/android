@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Log.d(tag, "The onCreate() event");
 
+        /*
         //                                                  //To register receivers of the broadcast
         Log.d(tag, "Registrando....");
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
 
         IntentFilter intentTaskCountReady = new IntentFilter("com.LGF.CUSTOM_INTENT.TasksCountReady");
         this.registerReceiver(updateTaskCountReceiver, intentTaskCountReady);
+        */
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -44,6 +46,14 @@ public class MainActivity extends AppCompatActivity
     {
         super.onStart();
         Log.d(tag, "The onStart() event");
+        //                                                  //To register receivers of the broadcast
+        Log.d(tag, "Registrando....");
+
+        IntentFilter intentTaskReady = new IntentFilter("com.LGF.CUSTOM_INTENT.TasksReady");
+        this.registerReceiver(this.showTaskReceiver, intentTaskReady);
+
+        IntentFilter intentTaskCountReady = new IntentFilter("com.LGF.CUSTOM_INTENT.TasksCountReady");
+        this.registerReceiver(updateTaskCountReceiver, intentTaskCountReady);
     }
     //------------------------------------------------------------------------------------------------------------------
     @Override
