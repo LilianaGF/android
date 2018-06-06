@@ -13,4 +13,7 @@
     <string name="ShortDescription">Short description</string>
     <string name="Percentage" />
     <string name="intPercentage">0%</string>
+    <string name="ToDo">To Do</string>
+    <string name="Doing">Doing</string>
+    <string name="All">All</string>
 </resources>
